@@ -51,7 +51,7 @@ const event: BotEvent = {
           },
           {
             name: "Starts at",
-            value: `${new Date(startAt).toLocaleTimeString()}`,
+            value: `<t:{${startAt}}>`,
             inline: true,
           },
           {
