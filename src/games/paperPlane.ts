@@ -189,7 +189,7 @@ async function getWinnerMessage(
   gameId: string
 ) {
   const embed = new EmbedBuilder()
-    .setColor("#0099ff")
+    .setColor("#AE3E7E")
     .setTitle(":checkered_flag: PAPER AIRPLANE RACE - WE HAVE A WINNER!")
     .setDescription("Congratulations <@" + winnerId + ">! :trophy: You were the best this time!:")
     .setFooter({

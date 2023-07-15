@@ -38,31 +38,30 @@ const event: BotEvent = {
         });
       }
 
+      const inscriptionEndedTimestamp = startAt - timeToWaitBeforeCloseInscription;
       const embed = new EmbedBuilder()
-        .setColor("#00ff00")
-        .setAuthor({
-          name: "PAPER PLANE GAME",
-          iconURL: "https://meme.mawacademia.com/maw.png",
-        })
+        .setColor("#AE3E7E")
+        .setTitle("PAPER AIRPLANE RACE - Warming Up")
+        .setDescription("Get ready launchers! A new paper airplane race is starting.")
         .setFields([
           {
-            name: "Bet",
-            value: `${amount}SOL`,
+            name: "Bet Amount",
+            value: `${amount} SOL`,
             inline: true,
           },
           {
-            name: "Start at",
+            name: "Starts at",
             value: `${new Date(startAt).toLocaleTimeString()}`,
             inline: true,
           },
           {
-            name: "Inscription's end at",
-            value: `${new Date(startAt - timeToWaitBeforeCloseInscription).toLocaleTimeString()}`,
-            inline: true,
+            name: "Player Limit",
+            value: "10",
           },
           {
-            name: "Max players",
-            value: "10",
+            name: "Inscription's end at",
+            value: `<t:{${inscriptionEndedTimestamp}}:R>`,
+            inline: true,
           },
         ]);
       const buttonJoin = new ButtonBuilder().setCustomId("joinGame").setLabel("Join").setStyle(ButtonStyle.Success);
