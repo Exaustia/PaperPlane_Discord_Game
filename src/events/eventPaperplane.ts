@@ -39,6 +39,8 @@ const event: BotEvent = {
       }
 
       const inscriptionEndedTimestamp = startAt - timeToWaitBeforeCloseInscription;
+      // in seconde
+      const inscriptionEndedTimestampInSeconds = Math.floor(inscriptionEndedTimestamp / 1000);
       const embed = new EmbedBuilder()
         .setColor("#AE3E7E")
         .setTitle("PAPER AIRPLANE RACE - Warming Up")
@@ -51,7 +53,7 @@ const event: BotEvent = {
           },
           {
             name: "Starts at",
-            value: `<t:${startAt}>`,
+            value: `<t:${Math.floor(startAt / 1000)}>`,
             inline: true,
           },
           {
@@ -61,7 +63,7 @@ const event: BotEvent = {
           },
           {
             name: "Inscription's end at",
-            value: `<t:${inscriptionEndedTimestamp}:R>`,
+            value: `<t:${Math.floor(inscriptionEndedTimestamp / 1000)}:R>`,
           },
         ]);
       const buttonJoin = new ButtonBuilder().setCustomId("joinGame").setLabel("Join").setStyle(ButtonStyle.Success);
