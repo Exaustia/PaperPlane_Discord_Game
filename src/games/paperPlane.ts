@@ -169,9 +169,9 @@ async function endGame(id: string) {
     });
 
     return {
-      message: result.data.message || null,
-      error: result.data.error || false,
-      data: result.data || null,
+      message: result.data.data.message || null,
+      error: result.data.data.error || false,
+      data: result.data.data || null,
     };
   } catch (error) {
     return {
