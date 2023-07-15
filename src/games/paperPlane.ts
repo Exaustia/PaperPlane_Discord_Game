@@ -29,7 +29,7 @@ const paperPlane = async (interaction: Interaction) => {
     const diff = game.startAt - new Date().getTime();
     if (diff > 0) {
       channel.send({
-        content: `The game will start in <t:${Math.floor(game.startAt / 1000)}:R> seconds. Get your airplanes ready!`,
+        content: `The game will start in <t:${Math.floor(game.startAt / 1000)}:R>. Get your airplanes ready!`,
       });
       await sleep(diff);
     } else {
@@ -86,7 +86,7 @@ const paperPlane = async (interaction: Interaction) => {
         if (player.failed) {
           return `<@${player.id}>:\n${"-".repeat(0 + player.position)}${player.emoji}:checkered_flag: distance: ${
             player.position
-          }m\n`;
+          }m`;
         }
         const plus = Math.floor(Math.random() * 2) + 1;
 
@@ -189,9 +189,9 @@ async function getWinnerMessage(
   gameId: string
 ) {
   const embed = new EmbedBuilder()
-    .setColor("#AE3E7E")
+    .setColor("#C8E3F6")
     .setTitle(":checkered_flag: PAPER AIRPLANE RACE - WE HAVE A WINNER!")
-    .setDescription("Congratulations <@" + winnerId + ">! :trophy: You were the best this time!:")
+    .setDescription("Congratulations <@" + winnerId + ">! :trophy: You were the best this time!")
     .setFooter({
       text: `Game ID: ${gameId} | 4% fee per game`,
       iconURL: "https://cdn.discordapp.com/attachments/1116763352211927090/1129810604262178877/Mode_Isolation.png",
