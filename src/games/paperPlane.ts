@@ -29,7 +29,7 @@ const paperPlane = async (interaction: Interaction) => {
     const diff = game.startAt - new Date().getTime();
     if (diff > 0) {
       channel.send({
-        content: `The game will start in <${Math.floor(diff / 1000)} seconds. Get your airplanes ready!`,
+        content: `The game will start in <t:${Math.floor(game.startAt / 1000)}:R> seconds. Get your airplanes ready!`,
       });
       await sleep(diff);
     } else {

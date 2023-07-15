@@ -88,7 +88,7 @@ const event: BotEvent = {
       collector.on("collect", async (i: any) => {
         // update the button join to link
         const buttonLink = new ButtonBuilder()
-          .setLabel("Link")
+          .setLabel("Bet")
           .setStyle(ButtonStyle.Link)
           .setURL(
             `https://bet.mawacademia.com/?gameId=${interaction.id}&discordId=${i.user.id}&username=${
@@ -101,7 +101,7 @@ const event: BotEvent = {
 
         const newRow = new ActionRowBuilder().addComponents(buttonLink);
         i.reply({
-          content: "Click on the link to join the game",
+          content: "Click on the link below to bet on the game!",
           components: [newRow],
           ephemeral: true,
         });
