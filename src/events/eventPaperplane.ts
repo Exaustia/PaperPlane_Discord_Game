@@ -39,7 +39,7 @@ const event: BotEvent = {
 
       const embed = new EmbedBuilder()
         .setColor("#AE3E7E")
-        .setTitle("PAPER AIRPLANE RACE - Warming Up")
+        .setTitle("PAPER AIRPLANE RACE - WARMING UP")
         .setDescription("Get ready launchers! A new paper airplane race is starting.")
         .setFooter({
           text: `Game ID: ${interaction.id} | 4% fee per game`,
@@ -52,8 +52,8 @@ const event: BotEvent = {
             inline: true,
           },
           {
-            name: "Starts at",
-            value: `<t:${Math.floor(startAt / 1000)}>`,
+            name: "End of inscriptions in",
+            value: `<t:${Math.floor(inscriptionEnd / 1000)}:R>`,
             inline: true,
           },
           {
@@ -62,8 +62,8 @@ const event: BotEvent = {
             inline: true,
           },
           {
-            name: "Inscription's end in",
-            value: `<t:${Math.floor(inscriptionEnd / 1000)}:R>`,
+            name: "Race starts in",
+            value: `<t:${Math.floor(startAt / 1000)}:R>`,
           },
         ]);
       const buttonJoin = new ButtonBuilder().setCustomId("joinGame").setLabel("Join!").setStyle(ButtonStyle.Success);
