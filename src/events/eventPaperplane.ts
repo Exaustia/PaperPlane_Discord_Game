@@ -51,17 +51,17 @@ const event: BotEvent = {
           },
           {
             name: "Starts at",
-            value: `<t:{${startAt}}>`,
+            value: `<t:${startAt}>`,
             inline: true,
           },
           {
             name: "Player Limit",
             value: "10",
+            inline: true,
           },
           {
             name: "Inscription's end at",
-            value: `<t:{${inscriptionEndedTimestamp}}:R>`,
-            inline: true,
+            value: `<t:${inscriptionEndedTimestamp}:R>`,
           },
         ]);
       const buttonJoin = new ButtonBuilder().setCustomId("joinGame").setLabel("Join").setStyle(ButtonStyle.Success);
