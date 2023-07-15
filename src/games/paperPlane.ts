@@ -165,7 +165,7 @@ async function endGame(id: string) {
       headers: {
         "Content-Type": "application/json",
       },
-      id: id,
+      gameId: id,
     });
 
     return {
@@ -174,7 +174,6 @@ async function endGame(id: string) {
       data: result.data || null,
     };
   } catch (error) {
-    console.log("ENDGAME ERROR", error);
     return {
       message: "An error occured",
       error: true,
