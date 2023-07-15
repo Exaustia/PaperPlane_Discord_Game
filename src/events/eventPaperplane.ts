@@ -45,6 +45,10 @@ const event: BotEvent = {
         .setColor("#AE3E7E")
         .setTitle("PAPER AIRPLANE RACE - Warming Up")
         .setDescription("Get ready launchers! A new paper airplane race is starting.")
+        .setFooter({
+          text: `Game ID: ${interaction.id} | 4% fee per game`,
+          iconURL: "https://cdn.discordapp.com/attachments/1116763352211927090/1129810604262178877/Mode_Isolation.png",
+        })
         .setFields([
           {
             name: "Bet Amount",
@@ -62,11 +66,11 @@ const event: BotEvent = {
             inline: true,
           },
           {
-            name: "Inscription's end at",
+            name: "Inscription's end in",
             value: `<t:${Math.floor(inscriptionEndedTimestamp / 1000)}:R>`,
           },
         ]);
-      const buttonJoin = new ButtonBuilder().setCustomId("joinGame").setLabel("Join").setStyle(ButtonStyle.Success);
+      const buttonJoin = new ButtonBuilder().setCustomId("joinGame").setLabel("Join!").setStyle(ButtonStyle.Success);
       const row = new ActionRowBuilder().addComponents(buttonJoin);
 
       await interaction.reply({
