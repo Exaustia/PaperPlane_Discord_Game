@@ -4,8 +4,6 @@ import { cancelGame, getProgressGameByGuild, insertGame } from "../schemas/paper
 import paperPlane from "../games/paperPlane";
 import axios from "axios";
 
-const timeToWaitBeforeCloseInscription = 30000;
-
 const event: BotEvent = {
   name: "interactionCreate",
   execute: async (interaction: Interaction) => {
@@ -30,6 +28,7 @@ const event: BotEvent = {
       }
 
       const startAt = new Date().getTime() + 180000;
+      const inscriptionEnd = new Date().getTime() + 120000;
       const newGame = await insertGame(interaction.id, interaction.guildId, startAt, amount);
       if (!newGame) {
         return interaction.reply({
@@ -38,9 +37,6 @@ const event: BotEvent = {
         });
       }
 
-      const inscriptionEndedTimestamp = startAt - timeToWaitBeforeCloseInscription;
-      // in seconde
-      const inscriptionEndedTimestampInSeconds = Math.floor(inscriptionEndedTimestamp / 1000);
       const embed = new EmbedBuilder()
         .setColor("#AE3E7E")
         .setTitle("PAPER AIRPLANE RACE - Warming Up")
@@ -67,7 +63,7 @@ const event: BotEvent = {
           },
           {
             name: "Inscription's end in",
-            value: `<t:${Math.floor(inscriptionEndedTimestamp / 1000)}:R>`,
+            value: `<t:${Math.floor(inscriptionEnd / 1000)}:R>`,
           },
         ]);
       const buttonJoin = new ButtonBuilder().setCustomId("joinGame").setLabel("Join!").setStyle(ButtonStyle.Success);
