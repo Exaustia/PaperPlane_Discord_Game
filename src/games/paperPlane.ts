@@ -29,7 +29,7 @@ const paperPlane = async (interaction: Interaction) => {
     const diff = game.startAt - new Date().getTime();
     if (diff > 0) {
       channel.send({
-        content: `The game will start in ${Math.floor(diff / 1000)} seconds`,
+        content: `The game will start in ${Math.floor(diff / 1000)} seconds. Get your airplanes ready!`,
       });
       await sleep(diff);
     } else {
@@ -89,7 +89,6 @@ const paperPlane = async (interaction: Interaction) => {
           }m\n`;
         }
         const plus = Math.floor(Math.random() * 2) + 1;
-        // const plus = 2;
 
         player.position += plus;
 
@@ -117,7 +116,7 @@ const paperPlane = async (interaction: Interaction) => {
           if (error) {
             await channel.send(endGameMsg);
           } else {
-            const embed = await getWinnerMessage(winners[0].id, amountWon, winners[0].wallet, data);
+            const embed = await getWinnerMessage(winners[0].id, amountWon, winners[0].wallet, data, game.id);
             await channel.send({ embeds: [embed] });
           }
         } else {
@@ -143,7 +142,7 @@ const paperPlane = async (interaction: Interaction) => {
           if (error) {
             await channel.send(endGameMsg);
           } else {
-            const embed = await getWinnerMessage(winner.id, amountWon, winner.wallet, data);
+            const embed = await getWinnerMessage(winner.id, amountWon, winner.wallet, data, game.id);
             await channel.send({ embeds: [embed] });
           }
         }
@@ -182,21 +181,22 @@ async function endGame(id: string) {
   }
 }
 
-async function getWinnerMessage(winnerId: string, prize: string | number, wallet: string, transaction: string) {
+async function getWinnerMessage(
+  winnerId: string,
+  prize: string | number,
+  wallet: string,
+  transaction: string,
+  gameId: string
+) {
   const embed = new EmbedBuilder()
     .setColor("#0099ff")
-    .setTitle(":checkered_flag: Paper Plane Race Finished :checkered_flag:")
-    .setDescription("Congratulations to <@" + winnerId + "> for winning the race ! :trophy:")
+    .setTitle(":checkered_flag: PAPER AIRPLANE RACE - WE HAVE A WINNER!")
+    .setDescription("Congratulations <@" + winnerId + ">! :trophy: You were the best this time!:")
     .setFooter({
-      text: "Maw Academia 2023 - 4% fee peer Race.",
-      iconURL: "https://i.imgur.com/8lZ2M2F.png",
+      text: `Game ID: ${gameId} | 3.5% fee per game`,
+      iconURL: "https://cdn.discordapp.com/attachments/1116763352211927090/1129810604262178877/Mode_Isolation.png",
     })
     .setFields([
-      {
-        name: "Winning Racer",
-        value: "<@" + winnerId + ">",
-        inline: true,
-      },
       {
         name: "Winner Prize",
         value: prize + " SOL",
@@ -208,7 +208,7 @@ async function getWinnerMessage(winnerId: string, prize: string | number, wallet
         inline: true,
       },
       {
-        name: "Transaction",
+        name: "Proof of payment",
         value: "https://solscan.io/tx/" + transaction,
       },
     ]);
