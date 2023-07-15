@@ -13,7 +13,7 @@ module.exports = (client: Client) => {
   let commandsDir = join(__dirname, "../commands");
 
   readdirSync(slashCommandsDir).forEach((file) => {
-    if (process.env.NODE_ENV === "production" && !file.endsWith(".js")) return;
+    if (process.env.NODE_ENV === "production" && !file.endsWith(".ts")) return;
     else if (process.env.NODE_ENV === "development" && !file.endsWith(".ts"))
       return;
     let command: SlashCommand = require(`${slashCommandsDir}/${file}`).default;
@@ -22,7 +22,7 @@ module.exports = (client: Client) => {
   });
 
   readdirSync(commandsDir).forEach((file) => {
-    if (process.env.NODE_ENV === "production" && !file.endsWith(".js")) return;
+    if (process.env.NODE_ENV === "production" && !file.endsWith(".ts")) return;
     else if (process.env.NODE_ENV === "development" && !file.endsWith(".ts"))
       return;
     let command: Command = require(`${commandsDir}/${file}`).default;

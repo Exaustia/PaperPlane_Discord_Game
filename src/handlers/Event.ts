@@ -8,7 +8,7 @@ module.exports = (client: Client) => {
   let eventsDir = join(__dirname, "../events");
 
   readdirSync(eventsDir).forEach((file) => {
-    if (process.env.NODE_ENV === "production" && !file.endsWith(".js")) return;
+    if (process.env.NODE_ENV === "production" && !file.endsWith(".ts")) return;
     else if (process.env.NODE_ENV === "development" && !file.endsWith(".ts"))
       return;
 
