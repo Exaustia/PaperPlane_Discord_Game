@@ -39,6 +39,7 @@ const event: BotEvent = {
 
       const embed = new EmbedBuilder()
         .setColor("#AE3E7E")
+        .setImage("https://images-ext-2.discordapp.net/external/0hAvhECev9jACW1fQL97BG3WDY3m3K2zPWjG9zAB81Q/https/media.tenor.com/jHsiqrp5To8AAAPo/paper-plane.mp4")
         .setTitle("PAPER AIRPLANE RACE - WARMING UP")
         .setDescription("Get ready launchers! A new paper airplane race is starting.")
         .setFooter({
