@@ -12,7 +12,7 @@ const event: BotEvent = {
     if (!interaction.guildId) return;
     if (!interaction.channel) return;
     try {
-      const amount = parseInt(interaction.fields.getTextInputValue("amount"));
+      const amount = Number(interaction.fields.getTextInputValue("amount"));
       if (isNaN(amount)) {
         return interaction.reply({
           content: "Please enter a valid amount",
