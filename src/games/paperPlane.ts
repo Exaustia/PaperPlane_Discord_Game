@@ -79,12 +79,14 @@ const paperPlane = async (interaction: Interaction) => {
         id: player.discordId,
         failed: false,
         position: 0,
-        guildColor: guildColor[randomEmoji],
+        guildColor: ":" + emojis[randomEmoji] + "_square" + ":",
         emoji: emoji,
       };
     });
 
-    const launchMessage = playersGame.map((player) => `<@${player.id}>:\n${player.emoji}`).join("\n");
+    const launchMessage = playersGame
+      .map((player) => `${player.guildColor}<@${player.id}>:\n${player.emoji}`)
+      .join("\n");
     const messageSent = await channel.send(launchMessage);
     const price = refreshedGame.amount;
     const nbPlayers = refreshedGame.players.length;
@@ -101,19 +103,19 @@ const paperPlane = async (interaction: Interaction) => {
           player.failed = true;
         }
         if (player.failed) {
-          return `<@${player.id}>:\n${"-".repeat(0 + player.position)}${player.emoji}:checkered_flag: distance: ${
-            player.position
-          }m`;
+          return `${player.guildColor}<@${player.id}>:\n${"_  ".repeat(0 + player.position)}${
+            player.emoji
+          }:checkered_flag: distance: ${player.position}m`;
         }
         const plus = Math.floor(Math.random() * 2) + 1;
 
         player.position += plus;
 
-        const spaceBeforePlane = player.position === 0 ? "" : "-".repeat(0 + player.position);
+        const spaceBeforePlane = player.position === 0 ? "" : "_  ".repeat(0 + player.position);
         if (i === maxLoop) {
-          return `<@${player.id}>:\n${spaceBeforePlane}${player.emoji}:checkered_flag: distance: ${player.position}m`;
+          return `${player.guildColor}<@${player.id}>:\n${spaceBeforePlane}${player.emoji}:checkered_flag: distance: ${player.position}m`;
         }
-        return `<@${player.id}>:\n${spaceBeforePlane}${player.emoji}`;
+        return `${player.guildColor}<@${player.id}>:\n${spaceBeforePlane}${player.emoji}`;
       });
 
       const messageToSend = message.join("\n");
@@ -144,13 +146,13 @@ const paperPlane = async (interaction: Interaction) => {
             if (player.id === winner.id) {
               player.position += 2;
 
-              return `<@${player.id}>:\n${"-".repeat(0 + player.position + 2)}${
+              return `${player.guildColor}<@${player.id}>:\n${"_  ".repeat(0 + player.position + 2)}${
                 player.emoji
               }:checkered_flag: distance: ${player.position}m`;
             }
-            return `<@${player.id}>:\n${"-".repeat(0 + player.position)}${player.emoji}:checkered_flag: distance: ${
-              player.position
-            }m`;
+            return `${player.guildColor}<@${player.id}>:\n${"_  ".repeat(0 + player.position)}${
+              player.emoji
+            }:checkered_flag: distance: ${player.position}m`;
           });
           const messageToSent = message.join("\n");
           await messageSent.edit(messageToSent);

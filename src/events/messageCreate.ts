@@ -1,7 +1,6 @@
 import { ChannelType, Message } from "discord.js";
 import { checkPermissions, sendTimedMessage } from "../functions";
 import { BotEvent } from "../types";
-import mongoose from "mongoose";
 
 const event: BotEvent = {
   name: "messageCreate",
@@ -17,20 +16,13 @@ const event: BotEvent = {
     let command = message.client.commands.get(args[0]);
 
     if (!command) {
-      let commandFromAlias = message.client.commands.find((command) =>
-        command.aliases.includes(args[0])
-      );
+      let commandFromAlias = message.client.commands.find((command) => command.aliases.includes(args[0]));
       if (commandFromAlias) command = commandFromAlias;
       else return;
     }
 
-    let cooldown = message.client.cooldowns.get(
-      `${command.name}-${message.member.user.username}`
-    );
-    let neededPermissions = checkPermissions(
-      message.member,
-      command.permissions
-    );
+    let cooldown = message.client.cooldowns.get(`${command.name}-${message.member.user.username}`);
+    let neededPermissions = checkPermissions(message.member, command.permissions);
     if (neededPermissions !== null)
       return sendTimedMessage(
         `
@@ -44,9 +36,7 @@ const event: BotEvent = {
     if (command.cooldown && cooldown) {
       if (Date.now() < cooldown) {
         sendTimedMessage(
-          `You have to wait ${Math.floor(
-            Math.abs(Date.now() - cooldown) / 1000
-          )} second(s) to use this command again.`,
+          `You have to wait ${Math.floor(Math.abs(Date.now() - cooldown) / 1000)} second(s) to use this command again.`,
           message.channel,
           5000
         );
@@ -57,9 +47,7 @@ const event: BotEvent = {
         Date.now() + command.cooldown * 1000
       );
       setTimeout(() => {
-        message.client.cooldowns.delete(
-          `${command?.name}-${message.member?.user.username}`
-        );
+        message.client.cooldowns.delete(`${command?.name}-${message.member?.user.username}`);
       }, command.cooldown * 1000);
     } else if (command.cooldown && !cooldown) {
       message.client.cooldowns.set(
