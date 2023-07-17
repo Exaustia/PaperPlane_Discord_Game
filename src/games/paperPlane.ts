@@ -50,22 +50,36 @@ const paperPlane = async (interaction: Interaction) => {
 
     await startGame(interaction.id);
 
-    const emojis = ["green", "blue", "rouge", "grey", "jaune", "orange", "violet"].map((e) => {
+    const emojis = ["blue", "green", "brown", "orange", "yellow", "purple", "red"];
+
+    const guildEmojis = emojis.map((e) => {
       return interaction.guild?.emojis.cache.find((emoji) => emoji.name === e);
     });
-    let emojies = emojis;
+
+    const guildColor = emojis.map((e) => {
+      // e + _square
+      const name = e + "_square";
+      return interaction.guild?.emojis.cache.find((emoji) => emoji.name === name);
+    });
+
+    let emojies = guildEmojis;
 
     const playersGame = refreshedGame.players.map((player) => {
       if (emojies.length === 0) {
-        emojies = emojis;
+        emojies = guildEmojis;
       }
-      const emoji = emojies[Math.floor(Math.random() * emojies.length)];
+      const randomEmoji = Math.floor(Math.random() * emojies.length);
+
+      const emoji = guildEmojis[randomEmoji];
+
       emojies = emojies.filter((e) => e !== emoji);
+
       return {
         wallet: player.wallet,
         id: player.discordId,
         failed: false,
         position: 0,
+        guildColor: guildColor[randomEmoji],
         emoji: emoji,
       };
     });
