@@ -53,7 +53,7 @@ const event: BotEvent = {
             inline: true,
           },
           {
-            name: "End of inscriptions in",
+            name: "End of inscriptions",
             value: `<t:${Math.floor(inscriptionEnd / 1000)}:R>`,
             inline: true,
           },
@@ -63,7 +63,7 @@ const event: BotEvent = {
             inline: true,
           },
           {
-            name: "Race starts in",
+            name: "Race starts",
             value: `<t:${Math.floor(startAt / 1000)}:R>`,
           },
         ]);
