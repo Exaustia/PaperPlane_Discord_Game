@@ -56,12 +56,6 @@ const paperPlane = async (interaction: Interaction) => {
       return interaction.guild?.emojis.cache.find((emoji) => emoji.name === e);
     });
 
-    const guildColor = emojis.map((e) => {
-      // e + _square
-      const name = e + "_square";
-      return interaction.guild?.emojis.cache.find((emoji) => emoji.name === name);
-    });
-
     let emojies = guildEmojis;
 
     const playersGame = refreshedGame.players.map((player) => {
@@ -103,7 +97,7 @@ const paperPlane = async (interaction: Interaction) => {
           player.failed = true;
         }
         if (player.failed) {
-          return `${player.guildColor}<@${player.id}>:\n${"_  ".repeat(0 + player.position)}${
+          return `${player.guildColor}<@${player.id}>:\n${"-".repeat(0 + player.position)}${
             player.emoji
           }:checkered_flag: distance: ${player.position}m`;
         }
@@ -111,7 +105,7 @@ const paperPlane = async (interaction: Interaction) => {
 
         player.position += plus;
 
-        const spaceBeforePlane = player.position === 0 ? "" : "_  ".repeat(0 + player.position);
+        const spaceBeforePlane = player.position === 0 ? "" : "-".repeat(0 + player.position);
         if (i === maxLoop) {
           return `${player.guildColor}<@${player.id}>:\n${spaceBeforePlane}${player.emoji}:checkered_flag: distance: ${player.position}m`;
         }
@@ -146,11 +140,11 @@ const paperPlane = async (interaction: Interaction) => {
             if (player.id === winner.id) {
               player.position += 2;
 
-              return `${player.guildColor}<@${player.id}>:\n${"_  ".repeat(0 + player.position + 2)}${
+              return `${player.guildColor}<@${player.id}>:\n${"-".repeat(0 + player.position + 2)}${
                 player.emoji
               }:checkered_flag: distance: ${player.position}m`;
             }
-            return `${player.guildColor}<@${player.id}>:\n${"_  ".repeat(0 + player.position)}${
+            return `${player.guildColor}<@${player.id}>:\n${"-".repeat(0 + player.position)}${
               player.emoji
             }:checkered_flag: distance: ${player.position}m`;
           });
