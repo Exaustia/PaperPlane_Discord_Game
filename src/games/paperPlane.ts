@@ -52,8 +52,12 @@ const paperPlane = async (interaction: Interaction) => {
 
     const emojis = ["blue", "green", "brown", "orange", "yellow", "purple", "red"];
 
+    const fetchEmojis = await interaction.guild?.emojis.fetch();
+    if (!fetchEmojis) {
+      return { error: "error while fetching emojis" };
+    }
     const guildEmojis = emojis.map((e) => {
-      return interaction.guild?.emojis.cache.find((emoji) => emoji.name === e);
+      return fetchEmojis.find((emoji) => emoji.name === e);
     });
 
     let emojies = guildEmojis;
