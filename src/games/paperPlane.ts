@@ -169,7 +169,7 @@ const paperPlane = async (interaction: Interaction) => {
     return { error: null };
   } catch (error) {
     console.log(error);
-    return { error: "An error occured" };
+    return { error: "PAPERPLANE: An error occured" };
   }
 };
 
@@ -190,8 +190,9 @@ async function endGame(id: string) {
       data: result.data.data || null,
     };
   } catch (error) {
+    console.log("endGame error", error);
     return {
-      message: "An error occured",
+      message: "An error occured while ending the game",
       error: true,
       data: null,
     };
@@ -205,29 +206,33 @@ async function getWinnerMessage(
   transaction: string,
   gameId: string
 ) {
-  const embed = new EmbedBuilder()
-    .setColor("#C8E3F6")
-    .setTitle(":checkered_flag: PAPER AIRPLANE RACE - WE HAVE A WINNER!")
-    .setDescription("Congratulations <@" + winnerId + ">! :trophy: You were the best this time!")
-    .setFooter({
-      text: `Game ID: ${gameId} | 4% fee per game`,
-      iconURL: "https://cdn.discordapp.com/attachments/1116763352211927090/1129810604262178877/Mode_Isolation.png",
-    })
-    .setFields([
-      {
-        name: "Winner Prize",
-        value: prize + " SOL",
-        inline: true,
-      },
-      {
-        name: "Wallet",
-        value: wallet.slice(0, 3) + "..." + wallet.slice(-3),
-        inline: true,
-      },
-      {
-        name: "Proof of payment",
-        value: "https://solscan.io/tx/" + transaction,
-      },
-    ]);
-  return embed;
+  try {
+    const embed = new EmbedBuilder()
+      .setColor("#C8E3F6")
+      .setTitle(":checkered_flag: PAPER AIRPLANE RACE - WE HAVE A WINNER!")
+      .setDescription("Congratulations <@" + winnerId + ">! :trophy: You were the best this time!")
+      .setFooter({
+        text: `Game ID: ${gameId} | 4% fee per game`,
+        iconURL: "https://cdn.discordapp.com/attachments/1116763352211927090/1129810604262178877/Mode_Isolation.png",
+      })
+      .setFields([
+        {
+          name: "Winner Prize",
+          value: prize + " SOL",
+          inline: true,
+        },
+        {
+          name: "Wallet",
+          value: wallet.slice(0, 3) + "..." + wallet.slice(-3),
+          inline: true,
+        },
+        {
+          name: "Proof of payment",
+          value: "https://solscan.io/tx/" + transaction,
+        },
+      ]);
+    return embed;
+  } catch (error) {
+    return new EmbedBuilder().setColor("#C8E3F6").setTitle("An error occured while getting the winner message");
+  }
 }
