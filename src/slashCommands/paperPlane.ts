@@ -2,13 +2,16 @@ import { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, Slash
 import { SlashCommand } from "../types";
 
 const command: SlashCommand = {
-  command: new SlashCommandBuilder().setName("paperplane").setDescription("start a new game"),
+  command: new SlashCommandBuilder()
+    .setName("paperplane")
+    .setDescription("Who can launch his paperplane the farthest?"),
   execute: async (interaction) => {
     try {
       const modal = new ModalBuilder().setCustomId("paperPlane").setTitle("Launch the game");
       const nbOfPlayer = new TextInputBuilder()
         .setCustomId("amount")
         .setLabel("What the bet?")
+        .setPlaceholder("Enter the amount of SOL to bet (0.001 SOL minimum)")
         .setMaxLength(5)
         .setStyle(TextInputStyle.Short);
 
