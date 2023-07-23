@@ -4,10 +4,8 @@ import { SlashCommand } from "../types";
 const command: SlashCommand = {
   command: new SlashCommandBuilder()
     .setName("onevsone")
-    .setDescription("start a new game")
-    .addUserOption((option) =>
-      option.setName("user").setDescription("Guess the right number against a friend").setRequired(true)
-    ),
+    .setDescription("Guess the right number against a friend")
+    .addUserOption((option) => option.setName("user").setRequired(true)),
   execute: async (interaction) => {
     try {
       const numberToGuess = Math.floor(Math.random() * 100) + 1;
