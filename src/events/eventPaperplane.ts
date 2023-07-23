@@ -98,7 +98,7 @@ const event: BotEvent = {
 
         const newRow = new ActionRowBuilder().addComponents(buttonLink);
         i.reply({
-          content: "Click on the link below to bet on the game!",
+          content: "Click the link below to bet!",
           components: [newRow],
           ephemeral: true,
         });

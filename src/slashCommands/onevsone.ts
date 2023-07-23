@@ -6,7 +6,7 @@ const command: SlashCommand = {
     .setName("onevsone")
     .setDescription("Guess the right number against a friend")
     .addUserOption((option) =>
-      option.setName("user").setDescription("Choose a friend!").setRequired(true)
+      option.setName("user").setDescription("Choose a friend").setRequired(true)
     ),
   execute: async (interaction) => {
     try {

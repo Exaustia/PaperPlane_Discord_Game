@@ -10,7 +10,7 @@ const command: SlashCommand = {
       const modal = new ModalBuilder().setCustomId("paperPlane").setTitle("Launch the game");
       const nbOfPlayer = new TextInputBuilder()
         .setCustomId("amount")
-        .setLabel("What the bet?")
+        .setLabel("What is the bet?")
         .setPlaceholder("Enter the amount of SOL to bet (0.001 SOL minimum)")
         .setMaxLength(5)
         .setStyle(TextInputStyle.Short);
