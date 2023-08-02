@@ -40,12 +40,11 @@ const paperPlane = async (interaction: Interaction) => {
     if (!refreshedGame) {
       return { error: "game not found" };
     }
-    if (!refreshedGame.players || refreshedGame.players?.length === 0) {
-      await cancelGame(interaction.id);
+    if (!refreshedGame.players || refreshedGame.players?.length <= 1) {
       channel.send({
         content: `>>> The game has been cancelled because there are no players.`,
       });
-      return { error: null };
+      return { error: "We need more than 1 player" };
     }
 
     await startGame(interaction.id);
