@@ -125,7 +125,7 @@ const event: BotEvent = {
             throw new Error("Error while canceling the game, please contact the admin. GameId: " + interaction.id);
           }
           // refund the players
-          await axios.post("https://yyc5mfr3kc.us-east-1.awsapprunner.com/bet/refund", {
+          await axios.post("https://nayte_api.aiternate.com/bet/refund", {
             headers: {
               "Content-Type": "application/json",
             },

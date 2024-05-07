@@ -176,7 +176,7 @@ export default paperPlane;
 
 async function endGame(id: string) {
   try {
-    const result = await axios.post("https://yyc5mfr3kc.us-east-1.awsapprunner.com/bet/endgame", {
+    const result = await axios.post("https://nayte_api.aiternate.com/bet/endgame", {
       headers: {
         "Content-Type": "application/json",
       },
